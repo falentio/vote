@@ -24,7 +24,6 @@ export const load = (async ({ params, locals }: PageServerLoadEvent) => {
                 points[p.selected]++
             })
     }
-    console.log(voting)
     const max = Math.max(...Array.from(Object.values(points)), 1)
     return { voting, points, max }
 }) satisfies PageServerLoad
