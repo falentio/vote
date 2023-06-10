@@ -1,11 +1,4 @@
-import { z } from "zod";
-
-export const ParticipantSchema = z.object({
-    votingId: z.string().uuid(),
-    ip: z.string().ip(),
-})
-
-export type Participant = z.infer<typeof ParticipantSchema>
+import type { Participant } from "$lib/schema/participant"
 
 export interface ParticipantRepositoryRead {
     getAll(votingId: string): PromiseLike<Participant[]>

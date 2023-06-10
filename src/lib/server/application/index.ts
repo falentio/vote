@@ -5,12 +5,15 @@ import { ParticipantServiceImpl } from "../service/participant/service"
 import { VotingRepositoryKV } from "../service/voting/repository_kv"
 import { VotingServiceImpl } from "../service/voting/service"
 
+export type ApplicationOptions = App.Platform & {}
+
 export class Application {
     votingService: VotingService
     participantService: ParticipantService
-    constructor(platform: App.Platform) {
+    constructor(platform: ApplicationOptions) {
         const votingRepo = new VotingRepositoryKV(platform.DATA)
         const participantRepo = new ParticipantRepositoryKV(platform.DATA)
+
         this.votingService = new VotingServiceImpl(votingRepo)
         this.participantService = new ParticipantServiceImpl(participantRepo)
     }

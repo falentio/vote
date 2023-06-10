@@ -1,4 +1,5 @@
-import { ParticipantSchema, type Participant, type ParticipantRepository, type ParticipantService } from "$lib/server/domain/participant";
+import { ParticipantSchema, type Participant } from "$lib/schema/participant";
+import type { ParticipantRepository, ParticipantService } from "$lib/server/domain/participant";
 
 export class ParticipantServiceImpl implements ParticipantService {
     constructor(private repo: ParticipantRepository) { }

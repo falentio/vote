@@ -1,4 +1,5 @@
-import { VotingSchema, type Voting, type VotingRepository, type VotingService } from "../../domain/voting";
+import { VotingSchema, type VotingCreate } from "$lib/schema/voting";
+import type { VotingRepository, VotingService } from "../../domain/voting";
 
 export class VotingServiceImpl implements VotingService {
     constructor(
@@ -9,11 +10,8 @@ export class VotingServiceImpl implements VotingService {
         return this.votingRepo.get(id)
     }
 
-    async create(voting: Voting) {
-        voting = VotingSchema.parse({
-            ...voting,
-            secret: crypto.randomUUID()
-        })
+    async create(votingToCreate: VotingCreate) {
+        const voting = VotingSchema.parse(votingToCreate)
         await this.votingRepo.create(voting);
         return voting;
     }

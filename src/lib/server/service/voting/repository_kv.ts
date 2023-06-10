@@ -1,4 +1,5 @@
-import type { Voting, VotingRepository } from "$lib/server/domain/voting";
+import type { Voting } from "$lib/schema/voting";
+import type { VotingRepository } from "$lib/server/domain/voting";
 import type { KVNamespace } from "@cloudflare/workers-types";
 
 export class VotingRepositoryKV implements VotingRepository {
@@ -9,7 +10,7 @@ export class VotingRepositoryKV implements VotingRepository {
 
     create(voting: Voting) {
         return this.kv.put("voting:" + voting.id, JSON.stringify(voting), {
-            expirationTtl: this.ttl > -1 ? this.ttl : undefined
+            expirationTtl: this.ttl > -1 ? this.ttl : undefined,
         })
     }
 

@@ -3,8 +3,9 @@ import { VotingRepositoryKV } from './repository_kv';
 import { KVNamespace } from "@miniflare/kv";
 import type { KVNamespace as CFKVNamespace } from '@cloudflare/workers-types';
 import { MemoryStorage } from "@miniflare/storage-memory";
-import { VotingSchema, type Voting } from '../../domain/voting';
 import { v4 } from 'uuid';
+import { id } from '$lib/utils/id';
+import { VotingSchema, type Voting } from '$lib/schema/voting';
 
 describe('voting repository', () => {
     const kv = new KVNamespace(new MemoryStorage()) as unknown as CFKVNamespace
@@ -14,12 +15,12 @@ describe('voting repository', () => {
 
     describe.each(repositories)("%s", (_, repo) => {
         const voting: Voting = VotingSchema.parse({
-            id: v4(),
+            id: id(),
             name: "fooo",
             description: "testing",
             secret: "",
             created: new Date(),
-            participant: [],
+            participants: [],
         })
         it("create", async (ctx) => {
             await expect(repo.create(voting)).resolves.toEqual(undefined)
