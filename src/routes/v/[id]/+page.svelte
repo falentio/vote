@@ -22,6 +22,9 @@
 		<span>(click to vote)</span>
 	</div>
 	<form
+		on:reset={() => {
+			selected = "";
+		}}
 		class="grid grid-cols-[auto_1fr_auto] gap-2 items-center"
 		use:enhance
 		method="post"
