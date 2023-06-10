@@ -14,6 +14,15 @@ export class VotingRepositoryKV implements VotingRepository {
         })
     }
 
+    async update(id: string, updateFn: (voting: Voting) => Voting) {
+        const voting = await this.get(id)
+        if (!voting) {
+            return
+        }
+        const updated = updateFn(voting)
+        return this.create(updated)
+    }
+
     get(id: string) {
         return this.kv.get<Voting>("voting:" + id, "json")
     }

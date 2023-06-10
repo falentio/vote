@@ -6,11 +6,13 @@ export interface VotingRepositoryRead {
 
 export interface VotingRepositoryWrite {
     create(voting: Voting): PromiseLike<void>
+    update(id: string, updateFn: (voting: Voting) => Voting): PromiseLike<void>
 }
 
 export interface VotingRepository extends VotingRepositoryRead, VotingRepositoryWrite { }
 
 export interface VotingService {
     get(id: string): PromiseLike<Voting | null>
+    update(id: string, updateFn: (voting: Voting) => Voting): PromiseLike<void>
     create(voting: VotingCreate): PromiseLike<Voting>
 }
