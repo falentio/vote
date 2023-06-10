@@ -1,8 +1,7 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 
-import type { Application } from "$lib/server/application";
-import type { KVNamespace } from "@cloudflare/workers-types";
+import type { Application, ApplicationOptions } from "$lib/server/application";
 
 declare global {
 	namespace App {
@@ -12,7 +11,7 @@ declare global {
 		}
 		// interface PageData {}
 		interface Platform {
-			DATA: KVNamespace
+			env?: ApplicationOptions
 		}
 	}
 }

@@ -11,10 +11,10 @@ export const handle: Handle = async ({ event, resolve }) => {
         return resolve(event)
     }
     if (NODE_ENV === "production") {
-        if (!event.platform) {
+        if (!event.platform?.env) {
             throw new Error("platform not set")
         }
-        application ||= new Application(event.platform)
+        application ||= new Application(event.platform.env)
     } else {
         const { FileStorage } = await import("@miniflare/storage-file")
         const { KVNamespace } = await import("@miniflare/kv")

@@ -4,8 +4,11 @@ import { ParticipantRepositoryKV } from "../service/participant/repository_kv"
 import { ParticipantServiceImpl } from "../service/participant/service"
 import { VotingRepositoryKV } from "../service/voting/repository_kv"
 import { VotingServiceImpl } from "../service/voting/service"
+import type { KVNamespace } from "@cloudflare/workers-types";
 
-export type ApplicationOptions = App.Platform & {}
+export type ApplicationOptions = {
+    DATA: KVNamespace
+}
 
 export class Application {
     votingService: VotingService
